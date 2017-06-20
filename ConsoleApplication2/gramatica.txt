@@ -1,0 +1,148 @@
+﻿<pre><div class="text_to_html">Terminais#bananans
+[ bolo ]
+[ torta ]
+[ biscoito ]
+[ mousse ]
+[ cupcake ]
+[ quiche ]
+[ sufle ]
+[ pave ]
+[ cheesecake ]
+[ no ]
+[ de ]
+[ e leve ]
+[ banana ]
+[ chocolate ]
+[ nozes ]
+[ morango ]
+[ framboesa ]
+[ vento ]
+[ mae ]
+[ formigueiro ]
+[ delicioso ]
+[ gostoso ]
+[ fofinho ]
+[ aerado ] 
+[ crocante ]
+[ fedorento ]
+[ exotico ]
+[ sequinho ]
+[ molhado ]
+[ 1 ] 
+[ 2 ]
+[ 3 ]
+[ 4 ]
+[ ovos ]
+[ xicaras de ]
+[ colheres de sopa de ]
+[ copos de ]
+[ ml de ]
+[ chocolate ]
+[ farinha ]
+[ nozes ]
+[ morangos ]
+[ framboesas ]
+[ raspas de laranja ]
+[ castanhas ]
+[ leite ]
+[ vento ]
+[ queijo ]
+[ ameixa ]
+[ creamcheese ]
+[ bata ]
+[ mexa ]
+[ misture ]
+[ liquidificador ]
+[ batedeira ]
+[ tigela ]
+[ forma ]
+[ caneca ] 
+[ forno ]
+[ geladeira ]
+[ microondas ]
+Variaveis
+[ S ]
+[ NOME ]
+[ INGREDIENTES ]
+[ MODO_DE_PREPARO ]
+[COMIDA ]
+[ SABOR ]
+[ ADJ ]
+[ QUANTIDADE ]
+[ PRODUTO ]
+[ ACAO ]
+[ RECIPIENTE ]
+[ LOCAL_DE_PREPARO ]
+[ UNIDADE ]
+[ PRODUTO_COM_UNIDADE ]
+Inicial					# O simbolo inicial possui uma secao propria, iniciada pela palavra [ Inicial"
+[ S ]					# Essa secao possui apenas uma linha com o simbolo inicial entre colchetes.
+Regras
+[ S ] > [ NOME] [ INGREDIENTES ] [ MODO_DE_PREPARO ];1 
+[ NOME ] > [ COMIDA ] 
+[ NOME ] > [ COMIDA ] [ de ] [ SABOR ];1 
+[ NOME ] > [ COMIDA ] [ ADJ ];1 
+[ NOME ] > [ COMIDA ] [ ADJ ] [ de ] [ SABOR ];1 
+[ INGREDIENTES ] > [ QUANTIDADE ] [ PRODUTO ] [ INGREDIENTES ] ;1 
+[ INGREDIENTES ] > [ QUANTIDADE PRODUTO ];1 
+[ MODO_DE_PREPARO ] > [ ACAO ] [ no ] [ RECIPIENTE ] [ e leve ] [ LOCAL_DE_PREPARO ];1 
+[ COMIDA ] > > [ bolo ] ;1 
+[ COMIDA ] > [ torta ] ;1 
+[ COMIDA ] > [ biscoito ] ;1 
+[ COMIDA ] > [ mousse ] ;1 
+[ COMIDA ] > [ cupcake ] ;1 
+[ COMIDA ] > [ quiche ] ;1 
+[ COMIDA ] > [ sufle ] ;1 
+[ COMIDA ] > [ pave ] ;1 
+[ COMIDA ] > [ cheesecake ];1 
+[ SABOR ] > [ banana ] ;1 
+[ SABOR ] > [ chocolate ] ;1 
+[ SABOR ] > [ nozes ] ;1 
+[ SABOR ] > [ morango ] ;1 
+[ SABOR ] > [ framboesa ] ;1 
+[ SABOR ] > [ vento ] ;1 
+[ SABOR ] > [ mae ] ;1 
+[ ADJ ] > [ formigueiro ] ;1 
+[ ADJ ] > [ delicioso ] ;1 
+[ ADJ ] > [ gostoso ] ;1 
+[ ADJ ] > [ fofinho ] ;1 
+[ ADJ ] > [ aerado ];1 
+[ ADJ ] > [ crocante ] ;1 
+[ ADJ ] > [ fedorento ] ;1 
+[ ADJ ] > [ exótico ] ;1 
+[ ADJ ] > [ sequinho ] ;1 
+[ ADJ ] > [ molhado ];1 
+[ QUANTIDADE ] > [ 1 ];1 
+[ QUANTIDADE ] > [ 2 ];1 
+[ QUANTIDADE ] > [ 3 ];1 
+[ QUANTIDADE ] > [ 4 ];1 
+[ PRODUTO ] > [ UNIDADE ] [ PRODUTO_COM_UNIDADE ];1 
+[ PRODUTO ] > [ ovos ] ;1 
+[ UNIDADE ] > [ xicaras de ] ;1 
+[ UNIDADE ] > [ colheres de sopa de] ;1 
+[ UNIDADE ] > [ copos de ] ;1 
+[ UNIDADE ] > [ ml de ];1 
+[ PRODUTO_COM_UNIDADE ] > [ chocolate ];1 
+[ PRODUTO_COM_UNIDADE ] > [ farinha ] ;1 
+[ PRODUTO_COM_UNIDADE ] > [ nozes ] ;1 
+[ PRODUTO_COM_UNIDADE ] > [ morangos ] ;1 
+[ PRODUTO_COM_UNIDADE ] > [ framboesas ] ;1 
+[ PRODUTO_COM_UNIDADE ] > [ raspas de laranja ];1 
+[ PRODUTO_COM_UNIDADE ] > [ castanhas ];1 
+[ PRODUTO_COM_UNIDADE ] > [ leite ] ;1 
+[ PRODUTO_COM_UNIDADE ] > [ vento ] ;1 
+[ PRODUTO_COM_UNIDADE ] > [ queijo ] ;1 
+[ PRODUTO_COM_UNIDADE ] > [ ameixa ] ;1 
+[ PRODUTO_COM_UNIDADE ] > [ creamcheese ];1 
+[ ACAO ] > [ bata ] ;1 
+[ ACAO ] > [ mexa ] ;1 
+[ ACAO ] > [ misture ] ;1 
+[ RECIPIENTE ] > [ liquidificador ] ;1 
+[ RECIPIENTE ] > [ batedeira ] ;1 
+[ RECIPIENTE ] > [ tigela ] ;1 
+[ RECIPIENTE ] > [ forma ] ;1 
+[ RECIPIENTE ] > [ caneca ];1 
+[ LOCAL_DE_PREPARO > [ forno ] ;1 
+[ LOCAL_DE_PREPARO ] > [ geladeira ] ;1 
+[ LOCAL_DE_PREPARO ] > [ microondas ];1 
+</div></pre>
