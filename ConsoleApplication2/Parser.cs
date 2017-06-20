@@ -80,6 +80,11 @@ namespace ConsoleApplication2
 
         }
 
+        private void complete()
+        {
+
+        }
+
         private void createInitial()
         {
             //List<StateStruct> D0 = new List<StateStruct>();
