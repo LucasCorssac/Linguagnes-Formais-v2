@@ -158,11 +158,12 @@ namespace ConsoleApplication2
 
             // Console.WriteLine(line.Contains("Terminais"));
 
-            System.IO.StreamReader file = new System.IO.StreamReader("..\\..\\gramatica.txt");
+            System.IO.StreamReader file = new System.IO.StreamReader("..\\..\\gramatica 2.txt");
 
             Gramatica g = new Gramatica(file);
-
-            Parser p = new Parser(g, "blablabla");
+            //List<string> ls = new List<string>();
+            string[] sa = "2 + 3 * 4".Split(' ');
+            Parser p = new Parser(g, sa);
 
             p.parseGrammar();
             p.printAllDs();

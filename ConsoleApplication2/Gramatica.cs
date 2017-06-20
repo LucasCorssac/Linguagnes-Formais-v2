@@ -112,6 +112,8 @@ namespace ConsoleApplication2
                 }
 
             } while ((line = file.ReadLine()) != null);
+
+            file.Close();
             
 
         }

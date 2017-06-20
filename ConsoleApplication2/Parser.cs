@@ -33,13 +33,13 @@ namespace ConsoleApplication2
     {
         List<DClass> DList = new List<DClass>();
         Gramatica gramatica;
-        string inputString;
+        string[] inputStringArray;
         int inputPointer;
 
-        public Parser(Gramatica gramatica, string inputString)
+        public Parser(Gramatica gramatica, string[] inputStringArray)
         {
             this.gramatica = gramatica;
-            this.inputString = inputString;
+            this.inputStringArray = inputStringArray;
             this.inputPointer = 0;
         }
 
@@ -75,6 +75,10 @@ namespace ConsoleApplication2
             }
         }
 
+        private void scan()
+        {
+
+        }
 
         private void createInitial()
         {
@@ -121,8 +125,6 @@ namespace ConsoleApplication2
             //{
 
             //}  //codigo não usado
-
-
 
         }
 
