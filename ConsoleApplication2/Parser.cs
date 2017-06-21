@@ -75,8 +75,23 @@ namespace ConsoleApplication2
             }
         }
 
-        private void scan()
+        private void scan(DClass D, string token)
         {
+            if (gramatica.isTerminal(token))
+            {
+                foreach (StateStruct state in DList[inputPointer].SList)
+                {
+                    if(state.pointer < state.rightSide.Count)
+                    {
+                        if(String.Equals(state.rightSide[state.pointer], token))
+                        {
+                            StateStruct nState = new StateStruct(state.leftSide, state.rightSide, state.pointer + 1, state.origin);
+                            //Console.WriteLine("{0} > {1}", nState.leftSide, nState.rightSide[nState.pointer - 1]);
+                            D.SList.Add(nState);
+                        }
+                    }
+                }
+            }
 
         }
 
@@ -135,8 +150,11 @@ namespace ConsoleApplication2
 
         public void printAllDs()
         {
+            int i = 0;
             foreach (DClass d in DList)
             {
+                Console.WriteLine("D{0}:", i);
+
                 foreach(StateStruct ss in d.SList)
                 {
                     Console.Write("{0} >", ss.leftSide);
@@ -147,12 +165,28 @@ namespace ConsoleApplication2
                     }
                     Console.WriteLine();
                 }
+
+                i++;
             }
         }
 
         public void parseGrammar()
         {
             createInitial();
+            //int i = 0;
+
+            for (inputPointer = 0; inputPointer < inputStringArray.Length; inputPointer++)
+            {
+                DClass D = new DClass();
+
+                //Console.WriteLine(inputStringArray[inputPointer]);
+
+                scan(D, inputStringArray[inputPointer]);
+                //complete();
+                //predict();
+
+                DList.Add(D);
+            }
         }
 
     }

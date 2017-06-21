@@ -163,6 +163,7 @@ namespace ConsoleApplication2
             Gramatica g = new Gramatica(file);
             //List<string> ls = new List<string>();
             string[] sa = "2 + 3 * 4".Split(' ');
+
             Parser p = new Parser(g, sa);
 
             p.parseGrammar();
