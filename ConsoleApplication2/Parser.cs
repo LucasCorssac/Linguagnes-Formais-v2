@@ -36,11 +36,17 @@ namespace ConsoleApplication2
         string[] inputStringArray;
         int inputPointer;
 
+        bool success;
+
+
         public Parser(Gramatica gramatica, string[] inputStringArray)
         {
             this.gramatica = gramatica;
             this.inputStringArray = inputStringArray;
             this.inputPointer = 0;
+            success = false;
+
+            parseGrammar();
         }
 
 
@@ -64,7 +70,7 @@ namespace ConsoleApplication2
                 {
                     foreach (List<string> producao in gramatica.regrasDeProducao[variableToBeAdded])
                     {
-                        StateStruct state = new StateStruct(variableToBeAdded, producao, 0, 0);
+                        StateStruct state = new StateStruct(variableToBeAdded, producao, 0, inputPointer);
                         D.SList.Add(state);
                         predict(D, state); // RECURSÃO!!!!!
 
@@ -79,15 +85,23 @@ namespace ConsoleApplication2
         {
             if (gramatica.isTerminal(token))
             {
-                foreach (StateStruct state in DList[inputPointer].SList)
+                foreach (StateStruct state in DList[inputPointer - 1].SList)
                 {
                     if(state.pointer < state.rightSide.Count)
                     {
                         if(String.Equals(state.rightSide[state.pointer], token))
                         {
                             StateStruct nState = new StateStruct(state.leftSide, state.rightSide, state.pointer + 1, state.origin);
-                            //Console.WriteLine("{0} > {1}", nState.leftSide, nState.rightSide[nState.pointer - 1]);
                             D.SList.Add(nState);
+                            if(nState.pointer < nState.rightSide.Count)
+                            {
+                                predict(D, nState);
+                            }
+                            else
+                            {
+                                complete(D, nState);
+                            }
+
                         }
                     }
                 }
@@ -95,9 +109,31 @@ namespace ConsoleApplication2
 
         }
 
-        private void complete()
+        private void complete(DClass D, StateStruct stateToComplete)
         {
+            string variableToComplete = stateToComplete.leftSide;
 
+            foreach (StateStruct state in DList[stateToComplete.origin].SList) 
+            {
+
+                if (state.pointer < state.rightSide.Count)
+                {
+                    if (String.Equals(state.rightSide[state.pointer], variableToComplete))
+                    {
+                        StateStruct nState = new StateStruct(state.leftSide, state.rightSide, state.pointer + 1, state.origin);
+                        D.SList.Add(nState);
+                        if (nState.pointer < nState.rightSide.Count)
+                        {
+                            predict(D, nState);
+                        }
+                        else
+                        {
+                            complete(D, nState);
+                        }
+                    }
+                }
+            }
+            
         }
 
         private void createInitial()
@@ -148,46 +184,72 @@ namespace ConsoleApplication2
 
         }
 
+        private void parseGrammar()
+        {
+            createInitial();
+            //int i = 0;
+
+            for (inputPointer = 1; inputPointer < inputStringArray.Length + 1; inputPointer++)
+            {
+                DClass D = new DClass();
+
+                scan(D, inputStringArray[inputPointer - 1]);
+
+                DList.Add(D);
+            }
+
+            checkSuccess();
+
+
+        }
+
+        private void checkSuccess()
+        {
+            foreach (StateStruct state in DList[inputPointer -1].SList)
+            {
+                if((String.Equals(state.leftSide, gramatica.inicial)) && state.origin == 0 && (state.pointer >= state.rightSide.Count))
+                {
+                    success = true;
+                }
+            }
+
+        }
+
+        public bool getSuccess()
+        {
+            return success;
+        }
+
         public void printAllDs()
         {
-            int i = 0;
+            int i = 0; 
             foreach (DClass d in DList)
             {
                 Console.WriteLine("D{0}:", i);
 
                 foreach(StateStruct ss in d.SList)
                 {
-                    Console.Write("{0} >", ss.leftSide);
-
-                    foreach(string s in ss.rightSide)
+                    Console.Write("\t{0}  > ", ss.leftSide);
+                    int j = 0;
+                    foreach (string s in ss.rightSide)
                     {
+                        if (j == ss.pointer)
+                            Console.Write(" .");
                         Console.Write(" {0}", s);
+                        j++;
+                        
                     }
-                    Console.WriteLine();
+                    if (j == ss.pointer)
+                        Console.Write(" .");
+
+                    Console.WriteLine("   /{0}", ss.origin);
                 }
 
                 i++;
             }
         }
 
-        public void parseGrammar()
-        {
-            createInitial();
-            //int i = 0;
 
-            for (inputPointer = 0; inputPointer < inputStringArray.Length; inputPointer++)
-            {
-                DClass D = new DClass();
-
-                //Console.WriteLine(inputStringArray[inputPointer]);
-
-                scan(D, inputStringArray[inputPointer]);
-                //complete();
-                //predict();
-
-                DList.Add(D);
-            }
-        }
 
     }
 
