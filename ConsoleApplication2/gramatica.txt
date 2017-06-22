@@ -84,7 +84,7 @@ Regras
 [ NOME ] > [ COMIDA ] [ ADJ ];1 
 [ NOME ] > [ COMIDA ] [ ADJ ] [ de ] [ SABOR ];1 
 [ INGREDIENTES ] > [ QUANTIDADE ] [ PRODUTO ] [ INGREDIENTES ] ;1 
-[ INGREDIENTES ] > [ QUANTIDADE PRODUTO ];1 
+[ INGREDIENTES ] > [ QUANTIDADE ] [ PRODUTO ];1 
 [ MODO_DE_PREPARO ] > [ ACAO ] [ no ] [ RECIPIENTE ] [ e leve ] [ LOCAL_DE_PREPARO ];1 
 [ COMIDA ] > > [ bolo ] ;1 
 [ COMIDA ] > [ torta ] ;1 

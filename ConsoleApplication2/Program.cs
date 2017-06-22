@@ -11,7 +11,7 @@ namespace ConsoleApplication2
     {
         static void Main(string[] args)
         {
-            string path = args[0];
+            string path = "C:\\Users\\Guilherme\\Desktop\\gramatica.txt";//args[0];
             System.IO.StreamReader file = new System.IO.StreamReader(path);
 
             Gramatica g = new Gramatica(file);
