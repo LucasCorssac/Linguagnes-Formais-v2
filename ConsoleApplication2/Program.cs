@@ -12,7 +12,14 @@ namespace ConsoleApplication2
         static void Main(string[] args)
         {
             ConsoleKey Verificardor;
-            string path = "C:\\Users\\Guilherme\\Desktop\\gramatica.txt";//args[0];
+            string path;//args[0];
+
+            Console.WriteLine("Insira o caminho para o arquivo:\n");
+
+            path = "C:\\Users\\guilherme.silveira\\Desktop\\gramatica.txt";//Console.ReadLine();
+
+            Console.WriteLine("\n\n");
+
             System.IO.StreamReader file = new System.IO.StreamReader(path);
 
             Gramatica g = new Gramatica(file);

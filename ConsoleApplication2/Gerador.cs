@@ -168,6 +168,8 @@ namespace ConsoleApplication2
 
             StringBuilder Builder = new StringBuilder();
 
+            Random RNG = new Random();
+
             do
             {
                 Temp = "";
@@ -175,13 +177,11 @@ namespace ConsoleApplication2
 
                 ClassD D = new ClassD();
 
-                Random RNG = new Random();
-
                 List<string> TerminaisUteis = PegaTerminais(D, inputPointer);//contem os terminais a direita do ponto no atual estado do parser
 
-                Temp = TerminaisUteis[RNG.Next(TerminaisUteis.Count)];//Guarda o terminal aleatório
-                Builder.Append(Temp);//Adciona a lista de todos os terminais aleatórios
-                Builder.Append(" ");//Adciona um espaço em nome da beleza
+                Temp = TerminaisUteis[RNG.Next()%TerminaisUteis.Count];//Guarda o terminal aleatório
+
+                Console.Write(Temp + " ");
 
                 scan(D, Temp);//Usa como entrada do parser um terminal aleatório dentro da lista de terminais uteis
 
@@ -196,7 +196,7 @@ namespace ConsoleApplication2
 
             } while (!(success && Terminou));//Verifica se a variavel aleatória permite e saida e se o estado atual nao vai dar merda
 
-            Console.WriteLine(Builder);
+            Console.WriteLine(Builder + "\n");
         }
 
         /// <summary>
