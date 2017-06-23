@@ -23,15 +23,15 @@ namespace ConsoleApplication2
 
     }
 
-    class DClass
+    class ClassD
     {
         public List<StateStruct> SList = new List<StateStruct>();
-        public Queue<string> variablesToBeAdded = new Queue<string>();
+        public List<string> AlreadyCompletedList = new List<string>();
     }
 
     class Parser
     {
-        List<DClass> DList = new List<DClass>();
+        List<ClassD> DList = new List<ClassD>();
         Gramatica gramatica;
         string[] inputStringArray;
         int inputPointer;
@@ -50,7 +50,7 @@ namespace ConsoleApplication2
         }
 
 
-        private void predict(DClass D, StateStruct stateToPredict)
+        private void predict(ClassD D, StateStruct stateToPredict)
         {
             string variableToBeAdded = stateToPredict.rightSide[stateToPredict.pointer];
 
@@ -81,7 +81,7 @@ namespace ConsoleApplication2
             }
         }
 
-        private void scan(DClass D, string token)
+        private void scan(ClassD D, string token)
         {
             if (gramatica.isTerminal(token))
             {
@@ -109,38 +109,50 @@ namespace ConsoleApplication2
 
         }
 
-        private void complete(DClass D, StateStruct stateToComplete)
+        private void complete(ClassD D, StateStruct stateToComplete)
         {
             string variableToComplete = stateToComplete.leftSide;
+            bool alreadyCompleted = false;
 
-            foreach (StateStruct state in DList[stateToComplete.origin].SList) 
+            foreach (string variable in D.AlreadyCompletedList)
             {
-
-                if (state.pointer < state.rightSide.Count)
+                if (string.Equals(variableToComplete, variable))
                 {
-                    if (String.Equals(state.rightSide[state.pointer], variableToComplete))
+                    alreadyCompleted = true;
+                }
+            }
+
+            if (!alreadyCompleted)
+            {
+                foreach (StateStruct state in DList[stateToComplete.origin].SList)
+                {
+                    if (state.pointer < state.rightSide.Count)
                     {
-                        StateStruct nState = new StateStruct(state.leftSide, state.rightSide, state.pointer + 1, state.origin);
-                        D.SList.Add(nState);
-                        if (nState.pointer < nState.rightSide.Count)
+                        if (String.Equals(state.rightSide[state.pointer], variableToComplete))
                         {
-                            predict(D, nState);
-                        }
-                        else
-                        {
-                            complete(D, nState);
+                            StateStruct nState = new StateStruct(state.leftSide, state.rightSide, state.pointer + 1, state.origin);
+                            D.SList.Add(nState);
+                            if (nState.pointer < nState.rightSide.Count)
+                            {
+
+                                predict(D, nState);
+                            }
+                            else
+                            {
+                                complete(D, nState);
+                            }
                         }
                     }
                 }
             }
-            
         }
+
 
         private void createInitial()
         {
             //List<StateStruct> D0 = new List<StateStruct>();
 
-            DClass D0 = new DClass();
+            ClassD D0 = new ClassD();
 
             StateStruct D0Initial = new StateStruct(gramatica.inicial, gramatica.regrasDeProducao[gramatica.inicial][0], 0, 0);
 
@@ -191,7 +203,7 @@ namespace ConsoleApplication2
 
             for (inputPointer = 1; inputPointer < inputStringArray.Length + 1; inputPointer++)
             {
-                DClass D = new DClass();
+                ClassD D = new ClassD();
 
                 scan(D, inputStringArray[inputPointer - 1]);
 
@@ -223,7 +235,7 @@ namespace ConsoleApplication2
         public void printAllDs()
         {
             int i = 0; 
-            foreach (DClass d in DList)
+            foreach (ClassD d in DList)
             {
                 Console.WriteLine("D{0}:", i);
 

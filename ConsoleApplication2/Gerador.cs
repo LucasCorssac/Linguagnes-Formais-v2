@@ -15,28 +15,6 @@ using System.Threading.Tasks;
 
 namespace ConsoleApplication2
 {
-    class StructState
-    {
-        public string leftSide;
-        public List<string> rightSide;
-        public int pointer;
-        public int origin;
-        
-        public StructState(string leftSide, List<string> rightSide, int pointer, int origin)
-        {
-            this.leftSide = leftSide;
-            this.rightSide = rightSide;
-            this.pointer = pointer;
-            this.origin = origin;   
-        }
-
-    }
-
-    class ClassD
-    {
-        public List<StructState> SList = new List<StructState>();
-        public Queue<string> variablesToBeAdded = new Queue<string>();
-    }
 
     class Gerador
     {
@@ -54,7 +32,7 @@ namespace ConsoleApplication2
             success = false;
         }
 
-        private void predict(ClassD D, StructState stateToPredict)
+        private void predict(ClassD D, StateStruct stateToPredict)
         {
             string variableToBeAdded = stateToPredict.rightSide[stateToPredict.pointer];
 
@@ -62,7 +40,7 @@ namespace ConsoleApplication2
             {
                 bool alreadyInAState = false;
 
-                foreach (StructState ss in D.SList)
+                foreach (StateStruct ss in D.SList)
                 {
                     if (string.Equals(ss.leftSide, variableToBeAdded))
                     {
@@ -74,7 +52,7 @@ namespace ConsoleApplication2
                 {
                     foreach (List<string> producao in gramatica.regrasDeProducao[variableToBeAdded])
                     {
-                        StructState state = new StructState(variableToBeAdded, producao, 0, inputPointer);
+                        StateStruct state = new StateStruct(variableToBeAdded, producao, 0, inputPointer);
                         D.SList.Add(state);
                         predict(D, state);
 
@@ -89,13 +67,13 @@ namespace ConsoleApplication2
         {
             if (gramatica.isTerminal(token))
             {
-                foreach (StructState state in DList[inputPointer - 1].SList)
+                foreach (StateStruct state in DList[inputPointer - 1].SList)
                 {
                     if(state.pointer < state.rightSide.Count)
                     {
                         if(String.Equals(state.rightSide[state.pointer], token))
                         {
-                            StructState nState = new StructState(state.leftSide, state.rightSide, state.pointer + 1, state.origin);
+                            StateStruct nState = new StateStruct(state.leftSide, state.rightSide, state.pointer + 1, state.origin);
                             D.SList.Add(nState);
                             if(nState.pointer < nState.rightSide.Count)
                             {
@@ -113,38 +91,49 @@ namespace ConsoleApplication2
 
         }
 
-        private void complete(ClassD D, StructState stateToComplete)
+        private void complete(ClassD D, StateStruct stateToComplete)
         {
             string variableToComplete = stateToComplete.leftSide;
+            bool alreadyCompleted = false;
 
-            foreach (StructState state in DList[stateToComplete.origin].SList) 
+            foreach (string variable in D.AlreadyCompletedList)
             {
-
-                if (state.pointer < state.rightSide.Count)
+                if(string.Equals(variableToComplete, variable))
                 {
-                    if (String.Equals(state.rightSide[state.pointer], variableToComplete))
+                    alreadyCompleted = true;
+                }
+            }
+
+            if(!alreadyCompleted)
+            {
+                foreach (StateStruct state in DList[stateToComplete.origin].SList)
+                {
+                    if (state.pointer < state.rightSide.Count)
                     {
-                        StructState nState = new StructState(state.leftSide, state.rightSide, state.pointer + 1, state.origin);
-                        D.SList.Add(nState);
-                        if (nState.pointer < nState.rightSide.Count)
+                        if (String.Equals(state.rightSide[state.pointer], variableToComplete))
                         {
-                            predict(D, nState);
-                        }
-                        else
-                        {
-                            complete(D, nState);
+                            StateStruct nState = new StateStruct(state.leftSide, state.rightSide, state.pointer + 1, state.origin);
+                            D.SList.Add(nState);
+                            if (nState.pointer < nState.rightSide.Count)
+                            {
+
+                                predict(D, nState);
+                            }
+                            else
+                            {
+                                complete(D, nState);
+                            }
                         }
                     }
                 }
-            }
-            
+            }            
         }
 
         private void createInitial()
         {
             ClassD D0 = new ClassD();
 
-            StructState D0Initial = new StructState(gramatica.inicial, gramatica.regrasDeProducao[gramatica.inicial][0], 0, 0);
+            StateStruct D0Initial = new StateStruct(gramatica.inicial, gramatica.regrasDeProducao[gramatica.inicial][0], 0, 0);
 
             D0.SList.Add(D0Initial);
 
@@ -210,7 +199,7 @@ namespace ConsoleApplication2
 
             List<string> Relevantes = new List<string>();
 
-            foreach (StructState State in DList[I - 1].SList)
+            foreach (StateStruct State in DList[I - 1].SList)
             {
                 if (State.pointer < State.rightSide.Count)
                 {
@@ -224,7 +213,7 @@ namespace ConsoleApplication2
 
         private void checkSuccess()
         {
-            foreach (StructState state in DList[inputPointer -1].SList)
+            foreach (StateStruct state in DList[inputPointer -1].SList)
             {
                 if((String.Equals(state.leftSide, gramatica.inicial)) && state.origin == 0 && (state.pointer >= state.rightSide.Count))
                 {
@@ -246,7 +235,7 @@ namespace ConsoleApplication2
             {
                 Console.WriteLine("D{0}:", i);
 
-                foreach(StructState ss in d.SList)
+                foreach(StateStruct ss in d.SList)
                 {
                     Console.Write("\t{0}  > ", ss.leftSide);
                     int j = 0;
