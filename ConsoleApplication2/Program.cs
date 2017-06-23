@@ -11,6 +11,7 @@ namespace ConsoleApplication2
     {
         static void Main(string[] args)
         {
+            ConsoleKey Verificardor;
             string path = "C:\\Users\\Guilherme\\Desktop\\gramatica.txt";//args[0];
             System.IO.StreamReader file = new System.IO.StreamReader(path);
 
@@ -26,7 +27,21 @@ namespace ConsoleApplication2
             p.printAllDs();
 
             if (p.getSuccess())
-                Console.WriteLine("\n\nSuccess!!!!!");
+                Console.WriteLine("\nAceito!!!!!\n\n");
+            else
+                Console.WriteLine("\n\nNegado!!!!\n\n");
+
+            Gerador Gera = new Gerador(g);
+            do
+            {
+                Gera.parseGrammar();
+
+                Verificardor = Console.ReadKey().Key;
+
+            } while (Verificardor == ConsoleKey.Enter);
+
+
+            Console.ReadKey();
 
         }
     }
