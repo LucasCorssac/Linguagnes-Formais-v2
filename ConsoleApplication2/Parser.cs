@@ -33,20 +33,18 @@ namespace ConsoleApplication2
     {
         List<ClassD> DList = new List<ClassD>();
         Gramatica gramatica;
-        string[] inputStringArray;
         int inputPointer;
 
         bool success;
 
 
-        public Parser(Gramatica gramatica, string[] inputStringArray)
+        public Parser(Gramatica gramatica)
         {
             this.gramatica = gramatica;
-            this.inputStringArray = inputStringArray;
             this.inputPointer = 0;
             success = false;
 
-            parseGrammar();
+            createInitial();
         }
 
 
@@ -147,7 +145,6 @@ namespace ConsoleApplication2
             }
         }
 
-
         private void createInitial()
         {
             //List<StateStruct> D0 = new List<StateStruct>();
@@ -196,10 +193,25 @@ namespace ConsoleApplication2
 
         }
 
-        private void parseGrammar()
+        private void checkSuccess()
         {
-            createInitial();
-            //int i = 0;
+            foreach (StateStruct state in DList[inputPointer - 1].SList)
+            {
+                if ((String.Equals(state.leftSide, gramatica.inicial)) && state.origin == 0 && (state.pointer >= state.rightSide.Count))
+                {
+                    success = true;
+                }
+            }
+
+        }
+
+        public bool getSuccess()
+        {
+            return success;
+        }
+
+        public void parseSentence(string[] inputStringArray)
+        {
 
             for (inputPointer = 1; inputPointer < inputStringArray.Length + 1; inputPointer++)
             {
@@ -212,25 +224,14 @@ namespace ConsoleApplication2
 
             checkSuccess();
 
-
         }
 
-        private void checkSuccess()
+
+        public void generateSentence(int size)
         {
-            foreach (StateStruct state in DList[inputPointer -1].SList)
-            {
-                if((String.Equals(state.leftSide, gramatica.inicial)) && state.origin == 0 && (state.pointer >= state.rightSide.Count))
-                {
-                    success = true;
-                }
-            }
 
         }
 
-        public bool getSuccess()
-        {
-            return success;
-        }
 
         public void printAllDs()
         {

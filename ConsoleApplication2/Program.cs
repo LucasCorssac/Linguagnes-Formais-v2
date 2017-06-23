@@ -30,7 +30,7 @@ namespace ConsoleApplication2
             //List<string> ls = new List<string>();
             string[] inputSplit = input.Split('#');
 
-            Parser p = new Parser(g, inputSplit);
+            Parser p = new Parser(g);
             p.printAllDs();
 
             if (p.getSuccess())
