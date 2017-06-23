@@ -226,6 +226,22 @@ namespace ConsoleApplication2
 
         }
 
+        private List<string> PegaTerminais(ClassD D, int I)
+        {
+
+            List<string> Relevantes = new List<string>();
+
+            foreach (StateStruct State in DList[I - 1].SList)
+            {
+                if (State.pointer < State.rightSide.Count)
+                {
+                    if (gramatica.terminais.Contains(State.rightSide[State.pointer]))
+                        Relevantes.Add(State.rightSide[State.pointer]);
+                }
+            }
+
+            return Relevantes;
+        }
 
         public void generateSentence(int size)
         {
