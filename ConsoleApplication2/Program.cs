@@ -16,7 +16,7 @@ namespace ConsoleApplication2
 
             Console.WriteLine("Insira o caminho para o arquivo:\n");
 
-            path = "C:\\Users\\guilherme.silveira\\Desktop\\gramatica.txt";//Console.ReadLine();
+            path = "..\\..\\gramatica 2.txt";//Console.ReadLine();
 
             Console.WriteLine("\n\n");
 
