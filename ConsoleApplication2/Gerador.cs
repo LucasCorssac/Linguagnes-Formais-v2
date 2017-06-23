@@ -18,7 +18,7 @@ namespace ConsoleApplication2
 
     class Gerador
     {
-        List<ClassD> DList = new List<ClassD>();
+        List<DClass> DList = new List<DClass>();
         Gramatica gramatica;
         int inputPointer;
 
@@ -32,7 +32,7 @@ namespace ConsoleApplication2
             success = false;
         }
 
-        private void predict(ClassD D, StateStruct stateToPredict)
+        private void predict(DClass D, StateStruct stateToPredict)
         {
             string variableToBeAdded = stateToPredict.rightSide[stateToPredict.pointer];
 
@@ -63,7 +63,7 @@ namespace ConsoleApplication2
             }
         }
 
-        private void scan(ClassD D, string token)
+        private void scan(DClass D, string token)
         {
             if (gramatica.isTerminal(token))
             {
@@ -91,7 +91,7 @@ namespace ConsoleApplication2
 
         }
 
-        private void complete(ClassD D, StateStruct stateToComplete)
+        private void complete(DClass D, StateStruct stateToComplete)
         {
             string variableToComplete = stateToComplete.leftSide;
             bool alreadyCompleted = false;
@@ -131,7 +131,7 @@ namespace ConsoleApplication2
 
         private void createInitial()
         {
-            ClassD D0 = new ClassD();
+            DClass D0 = new DClass();
 
             StateStruct D0Initial = new StateStruct(gramatica.inicial, gramatica.regrasDeProducao[gramatica.inicial][0], 0, 0);
 
@@ -164,7 +164,7 @@ namespace ConsoleApplication2
                 Temp = "";
                 success = false;
 
-                ClassD D = new ClassD();
+                DClass D = new DClass();
 
                 List<string> TerminaisUteis = PegaTerminais(D, inputPointer);//contem os terminais a direita do ponto no atual estado do parser
 
@@ -194,7 +194,7 @@ namespace ConsoleApplication2
         /// <param name="D"></param>
         /// <param name="I"></param>
         /// <returns></returns>
-        private List<string> PegaTerminais(ClassD D, int I)
+        private List<string> PegaTerminais(DClass D, int I)
         {
 
             List<string> Relevantes = new List<string>();
@@ -231,7 +231,7 @@ namespace ConsoleApplication2
         public void printAllDs()
         {
             int i = 0; 
-            foreach (ClassD d in DList)
+            foreach (DClass d in DList)
             {
                 Console.WriteLine("D{0}:", i);
 
