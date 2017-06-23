@@ -185,7 +185,7 @@ namespace ConsoleApplication2
 
             } while (!(success && Terminou));//Verifica se a variavel aleatória permite e saida e se o estado atual nao vai dar merda
 
-            Console.WriteLine(Builder + "\n");
+            Console.WriteLine("\n");
         }
 
         /// <summary>

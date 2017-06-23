@@ -193,15 +193,18 @@ namespace ConsoleApplication2
 
         }
 
-        private void checkSuccess()
+        private bool checkSuccess()
         {
             foreach (StateStruct state in DList[inputPointer - 1].SList)
             {
                 if ((String.Equals(state.leftSide, gramatica.inicial)) && state.origin == 0 && (state.pointer >= state.rightSide.Count))
                 {
                     success = true;
+                    
                 }
             }
+
+            return success;
 
         }
 
@@ -243,9 +246,46 @@ namespace ConsoleApplication2
             return Relevantes;
         }
 
-        public void generateSentence(int size)
+        public string generateSentence(int size)
         {
+            string randomSentence = "";
+            string randomTerminal = "";
 
+            Random rng = new Random();
+
+            inputPointer = 1;
+            while ((inputPointer < size +1) || (!checkSuccess()))
+            {
+
+                DClass D = new DClass();
+
+                List<string> terminalsFromPreviousD = getTerminalsFromPreviousDClass(D, inputPointer);
+
+                randomTerminal = terminalsFromPreviousD[rng.Next(terminalsFromPreviousD.Count)];
+                randomSentence += randomTerminal;
+
+                scan(D, randomTerminal);
+
+                DList.Add(D);
+
+                inputPointer++;
+            }
+
+            //for (inputPointer = 1; inputPointer < size + 1; inputPointer++)
+            //{
+            //    DClass D = new DClass();
+
+            //    List<string> terminalsFromPreviousD = getTerminalsFromPreviousDClass(D, inputPointer);
+
+            //    randomTerminal = terminalsFromPreviousD[rng.Next(terminalsFromPreviousD.Count)];
+            //    randomSentence += randomTerminal;
+
+            //    scan(D, randomTerminal);
+
+            //    DList.Add(D);
+            //}
+
+            return randomSentence;
         }
 
 
