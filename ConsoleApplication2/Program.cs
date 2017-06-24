@@ -56,6 +56,7 @@ namespace ConsoleApplication2
 
                         p = new Parser(g);
                         p.printAllDs();
+                        Console.ReadKey();
                         break;
 
                     case ConsoleKey.G:
