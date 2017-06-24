@@ -229,7 +229,7 @@ namespace ConsoleApplication2
 
         }
 
-        private List<string> getTerminalsFromPreviousDClass(DClass D, int I)
+        private List<string> getTerminalsFromPreviousDClass(int I)
         {
 
             List<string> Relevantes = new List<string>();
@@ -254,21 +254,33 @@ namespace ConsoleApplication2
             Random rng = new Random();
 
             inputPointer = 1;
-            while ((inputPointer < size +1) || (!checkSuccess()))
+
+            bool noMoreTerminals = false;
+
+            while ( ((inputPointer < size +1) || (!checkSuccess())) && !noMoreTerminals)
             {
 
                 DClass D = new DClass();
 
-                List<string> terminalsFromPreviousD = getTerminalsFromPreviousDClass(D, inputPointer);
+                List<string> terminalsFromPreviousD = getTerminalsFromPreviousDClass(inputPointer);
 
-                randomTerminal = terminalsFromPreviousD[rng.Next(terminalsFromPreviousD.Count)];
-                randomSentence += randomTerminal;
+                if (terminalsFromPreviousD.Count != 0)
+                {
+                    randomTerminal = terminalsFromPreviousD[rng.Next(terminalsFromPreviousD.Count)];
+                    randomSentence += " " + randomTerminal;
 
-                scan(D, randomTerminal);
+                    scan(D, randomTerminal);
 
-                DList.Add(D);
+                    DList.Add(D);
 
-                inputPointer++;
+                    inputPointer++;
+                }
+                else
+                {
+                    noMoreTerminals = true;
+                }
+
+                
             }
 
             //for (inputPointer = 1; inputPointer < size + 1; inputPointer++)

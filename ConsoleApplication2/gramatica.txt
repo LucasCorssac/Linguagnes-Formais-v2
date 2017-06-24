@@ -65,7 +65,7 @@ Variaveis
 [ NOME ]
 [ INGREDIENTES ]
 [ MODO_DE_PREPARO ]
-[COMIDA ]
+[ COMIDA ]
 [ SABOR ]
 [ ADJ ]
 [ QUANTIDADE ]
@@ -78,7 +78,7 @@ Variaveis
 Inicial					# O simbolo inicial possui uma secao propria, iniciada pela palavra [ Inicial"
 [ S ]					# Essa secao possui apenas uma linha com o simbolo inicial entre colchetes.
 Regras
-[ S ] > [ NOME] [ INGREDIENTES ] [ MODO_DE_PREPARO ];1 
+[ S ] > [ NOME ] [ INGREDIENTES ] [ MODO_DE_PREPARO ];1 
 [ NOME ] > [ COMIDA ] 
 [ NOME ] > [ COMIDA ] [ de ] [ SABOR ];1 
 [ NOME ] > [ COMIDA ] [ ADJ ];1 
@@ -86,7 +86,7 @@ Regras
 [ INGREDIENTES ] > [ QUANTIDADE ] [ PRODUTO ] [ INGREDIENTES ] ;1 
 [ INGREDIENTES ] > [ QUANTIDADE ] [ PRODUTO ];1 
 [ MODO_DE_PREPARO ] > [ ACAO ] [ no ] [ RECIPIENTE ] [ e leve ] [ LOCAL_DE_PREPARO ];1 
-[ COMIDA ] > > [ bolo ] ;1 
+[ COMIDA ] > [ bolo ] ;1 
 [ COMIDA ] > [ torta ] ;1 
 [ COMIDA ] > [ biscoito ] ;1 
 [ COMIDA ] > [ mousse ] ;1 
@@ -109,7 +109,7 @@ Regras
 [ ADJ ] > [ aerado ];1 
 [ ADJ ] > [ crocante ] ;1 
 [ ADJ ] > [ fedorento ] ;1 
-[ ADJ ] > [ exótico ] ;1 
+[ ADJ ] > [ exotico ] ;1 
 [ ADJ ] > [ sequinho ] ;1 
 [ ADJ ] > [ molhado ];1 
 [ QUANTIDADE ] > [ 1 ];1 
@@ -119,7 +119,7 @@ Regras
 [ PRODUTO ] > [ UNIDADE ] [ PRODUTO_COM_UNIDADE ];1 
 [ PRODUTO ] > [ ovos ] ;1 
 [ UNIDADE ] > [ xicaras de ] ;1 
-[ UNIDADE ] > [ colheres de sopa de] ;1 
+[ UNIDADE ] > [ colheres de sopa de ] ;1 
 [ UNIDADE ] > [ copos de ] ;1 
 [ UNIDADE ] > [ ml de ];1 
 [ PRODUTO_COM_UNIDADE ] > [ chocolate ];1 
@@ -142,7 +142,7 @@ Regras
 [ RECIPIENTE ] > [ tigela ] ;1 
 [ RECIPIENTE ] > [ forma ] ;1 
 [ RECIPIENTE ] > [ caneca ];1 
-[ LOCAL_DE_PREPARO > [ forno ] ;1 
+[ LOCAL_DE_PREPARO ] > [ forno ] ;1 
 [ LOCAL_DE_PREPARO ] > [ geladeira ] ;1 
 [ LOCAL_DE_PREPARO ] > [ microondas ];1 
 </div></pre>

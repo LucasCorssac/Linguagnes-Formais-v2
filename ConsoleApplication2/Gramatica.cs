@@ -147,33 +147,36 @@ namespace ConsoleApplication2
 
         public void printTerminais()
         {
-            Console.WriteLine("Terminais:");
+            Console.WriteLine("Terminais:\n");
             foreach (string terminal in terminais)
             {
+                Console.Write("\t");
                 Console.WriteLine(terminal);
             }
         }
         public void printVariaveis()
         {
-            Console.WriteLine("Variaveis:");
+            Console.WriteLine("Variaveis:\n");
             foreach (string variavel in variaveis)
             {
+                Console.Write("\t");
                 Console.WriteLine(variavel);
             }
         }
         public void printInicial()
         {
-            Console.WriteLine("Inicial:");
+            Console.WriteLine("Inicial:\n");
+            Console.Write("\t");
             Console.WriteLine(inicial);
         }
         public void printRegras()
         {
-            Console.WriteLine("Regras:");
+            Console.WriteLine("Regras:\n");
             foreach (KeyValuePair<String, List<List<String>>> kvp in regrasDeProducao)
-            {
-                
+            {   
                 foreach (List<String> lstring in kvp.Value)
                 {
+                    Console.Write("\t");
                     Console.Write("{0} ->", kvp.Key);
                     foreach (String str in lstring)
                     {
@@ -184,6 +187,13 @@ namespace ConsoleApplication2
             }
         }
 
+        public void print()
+        {
+            printTerminais();
+            printVariaveis();
+            printInicial();
+            printRegras();
+        }
 
     }
 

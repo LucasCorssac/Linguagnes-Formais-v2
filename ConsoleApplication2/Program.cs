@@ -11,21 +11,30 @@ namespace ConsoleApplication2
     {
         static void Main(string[] args)
         {
-            ConsoleKey Verificardor;
+            //ConsoleKey Verificardor;
             string path;//args[0];
 
             Console.WriteLine("Insira o caminho para o arquivo:\n");
 
-            path = "..\\..\\gramatica 2.txt";//Console.ReadLine();
+            path = "..\\..\\gramatica.txt";//Console.ReadLine();
 
             Console.WriteLine("\n\n");
 
             System.IO.StreamReader file = new System.IO.StreamReader(path);
 
             Gramatica g = new Gramatica(file);
+
+            g.print();
+
             Parser p = new Parser(g);
 
-            Console.WriteLine (p.generateSentence(11));
+            p.printAllDs();
+
+            Console.WriteLine(p.generateSentence(200));
+
+
+
+
 
 
             //Console.WriteLine("Insira uma sequencia de strings a ser parsed, use # para separar strings\nNão use espaços entre as strings e os #:");
