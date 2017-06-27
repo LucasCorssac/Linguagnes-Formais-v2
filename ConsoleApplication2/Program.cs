@@ -11,12 +11,11 @@ namespace ConsoleApplication2
     {
         static void Main(string[] args)
         {
-            //ConsoleKey Verificardor;
             string path;//args[0];
 
             Console.WriteLine("Insira o caminho para o arquivo contendo a linguagem:\n");
 
-            path = "..\\..\\gramatica.txt";//Console.ReadLine();
+            path = Console.ReadLine();//"..\\..\\gramatica 3.txt";
 
             Console.WriteLine("\n\n");
 
@@ -37,9 +36,10 @@ namespace ConsoleApplication2
                 Console.WriteLine("Pressione N para inserir um novo arquivo de linguagem");
                 Console.WriteLine("Pressione I para informações sobre o grupo.");
                 Console.WriteLine("Pressione Escape para sair.");
-                Console.WriteLine("\n");
 
                 Key = Console.ReadKey().Key;
+
+                Console.WriteLine("\n");
 
                 switch (Key)
                 {
@@ -48,15 +48,28 @@ namespace ConsoleApplication2
                         break;
 
                     case ConsoleKey.F:
-                        Console.WriteLine("Insira uma sequencia de strings a ser parsed, use # para separar strings\nNão use espaços entre as strings e os #:");
-                        string input = Console.ReadLine();
+                        do
+                        {
+                            Console.WriteLine("\nInsira uma sequencia de strings a ser parsed, use # para separar strings\nNão use espaços entre as strings e os #:");
+                            string input = Console.ReadLine();
 
-                        List<string> ls = new List<string>();
-                        string[] inputSplit = input.Split('#');
+                            List<string> ls = new List<string>();
+                            string[] inputSplit = input.Split('#');
 
-                        p = new Parser(g);
-                        p.printAllDs();
-                        Console.ReadKey();
+                            p = new Parser(g);
+                            p.parseSentence(inputSplit);
+                            p.printAllDs();
+
+                            if (p.getSuccess())
+                                Console.WriteLine("\nAceito!!!!!\n\n");
+                            else
+                                Console.WriteLine("\n\nNegado!!!!\n\n");
+
+                            Console.WriteLine("Digite N para reconhecer uma nova frase, ou qualquer tecla para sair.\n");
+
+                            Key = Console.ReadKey().Key;
+                        } while (Key == ConsoleKey.N);
+
                         break;
 
                     case ConsoleKey.G:

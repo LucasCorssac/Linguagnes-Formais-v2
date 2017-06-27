@@ -43,6 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="gramatica 3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>gramatica 3.txt</DependentUpon>
+    </Compile>
     <Compile Include="Gramatica.cs" />
     <Compile Include="Gerador.cs" />
     <Compile Include="Parser.cs" />
@@ -61,6 +66,13 @@
     <None Include="gramatica.txt">
       <SubType>Designer</SubType>
       <LastGenOutput>gramatica.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="gramatica 3.txt">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>gramatica 3.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
